@@ -17,4 +17,12 @@ public class TradeService {
     public List<Trade> getTradesByAccount(int accountID){
         return tradeDAOImpl.get(accountID);
     }
+
+    public int deleteTrade(int ticketID, int accountID){
+        return tradeDAOImpl.delete(ticketID, accountID);
+    }
+
+    public int deleteTradesByAccount(int accountID){
+        return tradeDAOImpl.delete(accountID);
+    }
 }

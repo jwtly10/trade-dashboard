@@ -15,8 +15,10 @@ public interface TradeDAO<T> {
 
     Optional<Trade> get(int id1, int id2);
 
-    void update(T t, int id);
+    int update(T t, int id);
 
-    void delete(int id);
+    int delete(int id);
+
+    int delete(int id1, int id2);
 
 }

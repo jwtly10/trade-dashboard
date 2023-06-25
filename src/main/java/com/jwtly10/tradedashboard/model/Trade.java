@@ -7,12 +7,12 @@ public class Trade {
     int accountID;
     String tradeType;
     String symbol;
-    float size;
-    float price;
-    float sl;
-    float tp;
-    float swap;
-    float profit;
+    double size;
+    double price;
+    double sl;
+    double tp;
+    double swap;
+    double profit;
     Timestamp opened;
     Timestamp closed;
     Timestamp created;
@@ -21,7 +21,7 @@ public class Trade {
     public Trade() {
     }
 
-    public Trade(int ticketID, int accountID, String tradeType, String symbol, float size, float price, float sl, float tp, float swap, float profit, Timestamp opened, Timestamp closed, Timestamp created, String outcome) {
+    public Trade(int ticketID, int accountID, String tradeType, String symbol, double size, double price, double sl, double tp, double swap, double profit, Timestamp opened, Timestamp closed, Timestamp created, String outcome) {
         this.ticketID = ticketID;
         this.accountID = accountID;
         this.tradeType = tradeType;
@@ -70,51 +70,51 @@ public class Trade {
         this.symbol = symbol;
     }
 
-    public float getSize() {
+    public double getSize() {
         return size;
     }
 
-    public void setSize(float size) {
+    public void setSize(double size) {
         this.size = size;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public float getSl() {
+    public double getSl() {
         return sl;
     }
 
-    public void setSl(float sl) {
+    public void setSl(double sl) {
         this.sl = sl;
     }
 
-    public float getTp() {
+    public double getTp() {
         return tp;
     }
 
-    public void setTp(float tp) {
+    public void setTp(double tp) {
         this.tp = tp;
     }
 
-    public float getSwap() {
+    public double getSwap() {
         return swap;
     }
 
-    public void setSwap(float swap) {
+    public void setSwap(double swap) {
         this.swap = swap;
     }
 
-    public float getProfit() {
+    public double getProfit() {
         return profit;
     }
 
-    public void setProfit(float profit) {
+    public void setProfit(double profit) {
         this.profit = profit;
     }
 

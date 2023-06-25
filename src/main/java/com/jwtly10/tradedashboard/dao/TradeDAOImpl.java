@@ -6,14 +6,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Component
+@Repository
 public class TradeDAOImpl implements TradeDAO<Trade> {
-private static final Logger log = LoggerFactory.getLogger(TradeDAOImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(TradeDAOImpl.class);
     private final JdbcTemplate jdbcTemplate;
 
     RowMapper<Trade> rowMapper = (rs, rowNum) -> {
@@ -22,12 +23,12 @@ private static final Logger log = LoggerFactory.getLogger(TradeDAOImpl.class);
         trade.setAccountID(rs.getInt("accountID"));
         trade.setTradeType(rs.getString("tradeType"));
         trade.setSymbol(rs.getString("symbol"));
-        trade.setSize(rs.getFloat("size"));
-        trade.setPrice(rs.getFloat("price"));
-        trade.setSl(rs.getFloat("sl"));
-        trade.setTp(rs.getFloat("tp"));
-        trade.setSwap(rs.getFloat("swap"));
-        trade.setProfit(rs.getFloat("profit"));
+        trade.setSize(rs.getDouble("size"));
+        trade.setPrice(rs.getDouble("price"));
+        trade.setSl(rs.getDouble("sl"));
+        trade.setTp(rs.getDouble("tp"));
+        trade.setSwap(rs.getDouble("swap"));
+        trade.setProfit(rs.getDouble("profit"));
         trade.setOpened(rs.getTimestamp("opened"));
         trade.setClosed(rs.getTimestamp("closed"));
         trade.setCreated(rs.getTimestamp("created"));
@@ -62,14 +63,16 @@ private static final Logger log = LoggerFactory.getLogger(TradeDAOImpl.class);
                 trade.getOpened(),
                 trade.getClosed());
         if (res == 1){
-            log.info("New closed trade created: " + trade.getTicketID());
+            log.info("New trade created: " + trade.getTicketID());
+        }else {
+            log.info("New trade failed to create: " + trade.getTicketID());
         }
    }
 
     @Override
     public List<Trade> get(int id) {
         String sql = "SELECT ticketID, accountID, tradeType, symbol, size, price, sl, tp, swap, profit,opened, closed, created, outcome FROM trades_tb WHERE accountID = ?";
-        List<Trade> trades = null;
+        List<Trade> trades = new ArrayList<>();
         try{
             trades = jdbcTemplate.query(sql, rowMapper, id);
         }catch (DataAccessException ex){
@@ -91,12 +94,17 @@ private static final Logger log = LoggerFactory.getLogger(TradeDAOImpl.class);
     }
 
     @Override
-    public void update(Trade trade, int id) {
-
+    public int update(Trade trade, int id) {
+        return 0;
     }
 
     @Override
-    public void delete(int id) {
+    public int delete(int id) {
+        return jdbcTemplate.update("DELETE FROM trades_tb where accountID = ?", id);
+    }
 
+    @Override
+    public int delete(int ticketID, int accountID) {
+        return jdbcTemplate.update("DELETE FROM trades_tb WHERE ticketID = ? AND accountID = ?", ticketID, accountID);
     }
 }
