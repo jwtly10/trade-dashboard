@@ -1,0 +1,44 @@
+@import "../../node_modules/bootstrap/scss/bootstrap";
+// Custom Colors
+$darkblue: #191C24;
+$darktext: #616684;
+
+[data-bs-theme="custom-dark"] {
+  //--bs-body-color: var(--bs-white);
+  //--bs-body-color-rgb: #{to-rgb($white)};
+  --bs-body-bg: #{$black};
+  //--bs-body-bg-rgb: #{to-rgb($black)};
+  //--bs-tertiary-bg: #{$blue-600};
+
+  .colorLoss{
+    color: #DC3545;
+  }
+  .colorWin{
+    color: #198754;
+  }
+  *{
+    color: white;
+  }
+
+  td{
+    color: white;
+  }
+
+  .bg-body-tertiary{
+    background-color: #191C24 !important;
+  }
+
+  .card{
+    background-color: #191C24 !important;
+  }
+
+  .money-card-text{
+    color: #616684;
+  }
+
+  .money-card-title{
+
+  }
+
+
+}
