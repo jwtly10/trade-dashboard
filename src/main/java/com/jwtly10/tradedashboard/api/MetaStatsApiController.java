@@ -4,11 +4,8 @@ import com.jwtly10.tradedashboard.service.MetricsService;
 import com.jwtly10.tradedashboard.service.metaapi.MetaStatsService;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.parser.ParseException;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/metastats")
@@ -17,29 +14,26 @@ public class MetaStatsApiController {
 
     private final MetaStatsService metaStatsService;
 
-    @Value("${meta.stats.api.account.id}")
-    private String accountId;
-
-    @GetMapping("/getOpenTrades")
-    public ResponseEntity<?> getOpenTrades(){
-        return ResponseEntity.ok(metaStatsService.getOpenTrades(accountId));
+    @GetMapping("/getOpenTrades/{accountKey}")
+    public ResponseEntity<?> getOpenTrades(@PathVariable("accountKey") String accountKey){
+        return ResponseEntity.ok(metaStatsService.getOpenTrades(accountKey));
     }
 
-    @GetMapping("/getHistoricTrades")
-    public ResponseEntity<?> getHistoricTrades(){
-        return ResponseEntity.ok(metaStatsService.getHistoricTrades(accountId));
+    @GetMapping("/getHistoricTrades/{accountKey}")
+    public ResponseEntity<?> getHistoricTrades(@PathVariable("accountKey") String accountKey){
+        return ResponseEntity.ok(metaStatsService.getHistoricTrades(accountKey));
     }
 
-    @GetMapping("/getAllMetrics")
-    public ResponseEntity<?> getAllMetrics() throws ParseException {
+    @GetMapping("/getAllMetrics/{accountKey}")
+    public ResponseEntity<?> getAllMetrics(@PathVariable("accountKey") String accountKey) throws ParseException {
         MetricsService metricsService = new MetricsService(metaStatsService);
-        return ResponseEntity.ok(metricsService.buildMetricsJSON(accountId).toString());
+        return ResponseEntity.ok(metricsService.buildMetricsJSON(accountKey).toString());
     }
 
-    @GetMapping("/getMetrics")
-    public ResponseEntity<?> getMetrics() throws ParseException {
+@GetMapping("/getMetrics/{accountKey}")
+    public ResponseEntity<?> getMetrics(@PathVariable("accountKey") String accountKey) throws ParseException {
         MetricsService metricsService = new MetricsService(metaStatsService);
-        return ResponseEntity.ok(metricsService.getKeyMetrics(accountId).toString());
+        return ResponseEntity.ok(metricsService.getKeyMetrics(accountKey).toString());
     }
 
 }

@@ -88,7 +88,7 @@ public class TradeDAOImpl implements TradeDAO<Trade> {
         try{
             trade = jdbcTemplate.queryForObject(sql, rowMapper, accountID, ticketID);
         }catch (DataAccessException ex){
-            log.info("Trade for found for ticketID: " + ticketID + " / AccountID: "+ accountID);
+            log.info("Trade not for found for ticketID: " + ticketID + " / AccountID: "+ accountID);
         }
         return Optional.ofNullable(trade);
     }
