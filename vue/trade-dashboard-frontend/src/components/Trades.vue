@@ -35,7 +35,7 @@
         methods: {
             getTrades(){
                 TradeService.getTrades(10134834).then((response) => {
-                    this.trades = response.data;
+                    this.trades = response.data
                 });
             }
         },

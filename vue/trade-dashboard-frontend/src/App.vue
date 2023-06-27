@@ -2,20 +2,7 @@
     <div class="text-center" id="app">
         <div class="container text-center">
             <div class="row">
-                <div class="row">
-                    <div class="col">
-                        <MoneyStats v-bind:stats="pnl"/>
-                    </div>
-                    <div class="col">
-                        <MoneyStats v-bind:stats="pnl"/>
-                    </div>
-                    <div class="col">
-                        <MoneyStats v-bind:stats="pnl"/>
-                    </div>
-                    <div class="col-12">
-                        <MoneyStats v-bind:stats="stats"/>
-                    </div>
-                </div>
+                <BaseStats v-bind="account"/>
                 <div class="row">
                     <Trades />
                 </div>
@@ -26,30 +13,23 @@
 
 <script>
 import Trades from './components/Trades.vue'
-import MoneyStats from "@/components/MoneyStats.vue";
+import BaseStats from "@/components/BaseStats.vue";
 
 export default {
     name: 'App',
     components: {
-        MoneyStats,
+        BaseStats,
         Trades
     },
     data() {
         return {
-            pnl: [{
-                header: 'Daily PNL',
-                value: 576.49,
-                percentage: 3.3
-            }],
-            stats: [{
-                header: 'Net Profit / Loss',
-                value: 256.4,
-                percentage: -2.3
-            }, {
-                header: 'Daily Drawdown Breach',
-                value: 10043.3,
-                percentage: -5.0
-            }]
+            account: {
+                accountID: 10155469,
+                accountKey: "26f45d70-73f4-447f-9cd6-6b798246cbf6",
+                accountSize: 10000,
+                accountType: "LIVE",
+                created: "2023-06-27T16:09:51.000+00:00"
+            },
         }
     }
 }

@@ -31,7 +31,7 @@ public class MetaStatsService {
                     HttpMethod.GET,
                     new HttpEntity<>(headers), String.class);
 
-            log.info("Success: Retrieved open trades from meta-stats-api");
+//            log.info("Success: Retrieved open trades from meta-stats-api");
 
             return response.getBody();
 
@@ -55,7 +55,7 @@ public class MetaStatsService {
                     HttpMethod.GET,
                     new HttpEntity<>(headers), String.class);
 
-            log.info("Success: Retrieved historic trades from meta-stats-api");
+//            log.info("Success: Retrieved historic trades from meta-stats-api");
 
             return response.getBody();
 
@@ -79,7 +79,12 @@ public class MetaStatsService {
                     HttpMethod.GET,
                     new HttpEntity<>(headers), String.class);
 
-            log.info("Success: Retrieved metrics from meta-stats-api");
+//            log.info("Success: Retrieved metrics from meta-stats-api");
+            if (response.getStatusCode() == HttpStatus.OK){
+                log.info("Success: Retrieved metrics from meta-stats-api");
+            }else {
+                log.error("Error getting metrics: " + response.getStatusCode() + " " + response.getBody());
+            }
 
             return response.getBody();
 
