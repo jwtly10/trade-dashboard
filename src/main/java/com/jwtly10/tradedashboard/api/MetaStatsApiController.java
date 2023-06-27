@@ -1,7 +1,9 @@
 package com.jwtly10.tradedashboard.api;
 
+import com.jwtly10.tradedashboard.service.MetricsService;
 import com.jwtly10.tradedashboard.service.metaapi.MetaStatsService;
 import lombok.RequiredArgsConstructor;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,9 +30,16 @@ public class MetaStatsApiController {
         return ResponseEntity.ok(metaStatsService.getHistoricTrades(accountId));
     }
 
+    @GetMapping("/getAllMetrics")
+    public ResponseEntity<?> getAllMetrics() throws ParseException {
+        MetricsService metricsService = new MetricsService(metaStatsService);
+        return ResponseEntity.ok(metricsService.buildMetricsJSON(accountId).toString());
+    }
+
     @GetMapping("/getMetrics")
-    public ResponseEntity<?> getMetrics(){
-        return ResponseEntity.ok(metaStatsService.getMetrics(accountId));
+    public ResponseEntity<?> getMetrics() throws ParseException {
+        MetricsService metricsService = new MetricsService(metaStatsService);
+        return ResponseEntity.ok(metricsService.getKeyMetrics(accountId).toString());
     }
 
 }
