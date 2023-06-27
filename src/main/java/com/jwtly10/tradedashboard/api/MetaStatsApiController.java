@@ -27,4 +27,10 @@ public class MetaStatsApiController {
     public ResponseEntity<?> getHistoricTrades(){
         return ResponseEntity.ok(metaStatsService.getHistoricTrades(accountId));
     }
+
+    @GetMapping("/getMetrics")
+    public ResponseEntity<?> getMetrics(){
+        return ResponseEntity.ok(metaStatsService.getMetrics(accountId));
+    }
+
 }

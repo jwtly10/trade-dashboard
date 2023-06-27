@@ -21,7 +21,7 @@ public class MetaStatsService {
     @Autowired
     private RestTemplate restTemplate;
 
-    public Object[] getOpenTrades(String accountId){
+    public String getOpenTrades(String accountId){
         try{
             HttpHeaders headers = new HttpHeaders();
             headers.set("auth-token", accountKey);
@@ -33,7 +33,8 @@ public class MetaStatsService {
 
             log.info("Success: Retrieved open trades from meta-stats-api");
 
-            return new String[]{response.getBody()};
+            return response.getBody();
+
         }catch (Exception e){
             log.error("Failed to get open trades" + e);
             throw new ResponseStatusException(
@@ -57,8 +58,33 @@ public class MetaStatsService {
             log.info("Success: Retrieved historic trades from meta-stats-api");
 
             return response.getBody();
+
         }catch (Exception e){
             log.error("Failed to get all trades" + e);
+            throw new ResponseStatusException(
+                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    "Exception while calling MetaStatsApi",
+                    e
+            );
+        }
+    }
+
+    public String getMetrics(String accountId){
+        try{
+            HttpHeaders headers = new HttpHeaders();
+            headers.set("auth-token", accountKey);
+
+            ResponseEntity<String> response = restTemplate.exchange(
+                    "%s/users/current/accounts/%s/metrics".formatted(baseUrl, accountId),
+                    HttpMethod.GET,
+                    new HttpEntity<>(headers), String.class);
+
+            log.info("Success: Retrieved metrics from meta-stats-api");
+
+            return response.getBody();
+
+        }catch (Exception e){
+            log.error("Failed to get metrics" + e);
             throw new ResponseStatusException(
                     HttpStatus.INTERNAL_SERVER_ERROR,
                     "Exception while calling MetaStatsApi",
