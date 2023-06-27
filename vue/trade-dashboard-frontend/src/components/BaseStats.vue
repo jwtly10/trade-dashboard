@@ -1,28 +1,35 @@
 <template>
+    <h1>Base Stats for account {{this.accountID + ' - ' +this.accountType}}</h1>
 <div class="row">
     <div class="col">
         <Stat :data="[
-            {title:'Starting Overall Balance',value:accountSizec}]"
+            {title:'Starting Overall Balance',value:statsAccountSize}]"
+        />
+    </div>
+    <div class="col">
+        <Stat :data="[
+            {title:'Net Profit / Loss',value:statsGetBalance}]"
         />
     </div>
     <div class="col-4">
         <Stat :data="[
-            {title:'Average Return Per Trade',value:averageReturn},
-            {title:'Win Rate',value:winrate}]"
+            {title:'Average Return Per Trade',value:statsAverageReturn},
+            {title:'Win Rate',value:statsWinRate}]"
         />
     </div>
-    <div class="col">
+    <div class="col-6">
         <Stat :data="[
-            {title:'Average Return Per Trade',value:averageReturn},
-            {title:'Win Rate',value:winrate}]"
+            {title:'Average Return Per Trade',value:statsAverageReturn},
+            {title:'Win Rate',value:statsWinRate}]"
         />
     </div>
-    <div class="col">
+    <div class="col-sm-6">
         <Stat :data="[
-            {title:'Average Return Per Trade',value:averageReturn},
-            {title:'Win Rate',value:winrate}]"
+            {title:'Average Return Per Trade',value:statsAverageReturn},
+            {title:'Win Rate',value:statsWinRate}]"
         />
     </div>
+
 </div>
 </template>
 
@@ -37,7 +44,10 @@ export default {
     },
     props: {
         accountKey : String,
-        accountSize: Number
+        accountSize: Number,
+        accountID : Number,
+        accountType: String,
+        created : undefined
     },
     methods: {
         async getStats() {
@@ -47,22 +57,27 @@ export default {
         },
     },
     computed:{
-        averageReturn(){
+        statsAverageReturn(){
             return "$" + (((this.stats.wonTrades * this.stats.averageWin) + (this.stats.lostTrades * this.stats.averageLoss) ) / this.stats.trades).toFixed(2)
         },
-        winrate(){
+        statsWinRate(){
             if (this.stats.wonTradesPercent) {
                return this.stats.wonTradesPercent.toFixed(2) + '%'
             }
         },
-        accountSizec(){
+        statsAccountSize(){
             return '$' + this.accountSize.toLocaleString()
+        },
+        statsGetBalance(){
+                if (this.stats.balance){
+                    return '$' + this.stats.balance.toLocaleString()
+                }
         }
     },
     data(){
         return {
            stats : {
-           }
+           },
         }
     },
     created() {
