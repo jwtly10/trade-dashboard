@@ -11,22 +11,24 @@
             {title:'Net Profit / Loss',value:statsGetPnl}]"
         />
     </div>
-    <div class="col-4">
-        <Stat :data="[
-            {title:'Average Return Per Trade',value:statsAverageReturn},
-            {title:'Win Rate',value:statsWinRate}]"
-        />
-    </div>
     <div class="col-6">
         <Stat :data="[
-            {title:'Average Return Per Trade',value:statsAverageReturn},
+            {title:'Average Return',value:statsAverageReturn},
+            {title:'Win Rate',value:statsWinRate},
             {title:'Win Rate',value:statsWinRate}]"
         />
     </div>
-    <div class="col-sm-6">
+    <div class="col-6 col-lg-9">
         <Stat :data="[
-            {title:'Average Return Per Trade',value:statsAverageReturn},
+            {title:'Number of Trades',value:statsTrades},
+            {title:'Number of Wins',value:statsWins},
             {title:'Win Rate',value:statsWinRate}]"
+        />
+    </div>
+    <div class="col">
+        <Stat :data="[
+            {title:'Average Return',value:statsAverageReturn},
+            ]"
         />
     </div>
 
@@ -61,8 +63,18 @@ export default {
                return this.stats.wonTradesPercent.toFixed(2) + '%'
             }
         },
+        statsWins(){
+            if (this.stats.wonTrades){
+                return this.stats.wonTrades
+            }
+        },
         statsAccountSize(){
             return '$' + this.account.accountSize.toLocaleString()
+        },
+        statsTrades(){
+            if (this.stats.trades){
+                return this.stats.trades
+            }
         },
         statsGetPnl(){
                 if (this.stats.balance && this.account.accountSize){
@@ -83,7 +95,11 @@ export default {
     },
     created() {
         this.getStats()
-
+    },
+    watch:{
+        account(){
+            this.getStats()
+        }
     }
 }
 </script>

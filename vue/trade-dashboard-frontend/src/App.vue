@@ -12,7 +12,6 @@
         <div v-else class="container text-center">
             <div class="row">
                 <BaseStats v-bind:account="selectedAccount"/>
-                <p>{{this.selectedAccount}}</p>
                 <div class="row">
                     <Trades />
                 </div>

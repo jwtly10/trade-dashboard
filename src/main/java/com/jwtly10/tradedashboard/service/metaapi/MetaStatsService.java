@@ -4,9 +4,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
+import org.springframework.retry.annotation.Backoff;
+import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.io.IOException;
+import java.util.Objects;
 
 @Service
 @Slf4j
@@ -69,6 +75,7 @@ public class MetaStatsService {
         }
     }
 
+    @Retryable(retryFor = HttpServerErrorException.class, maxAttempts = 2, backoff = @Backoff(delay = 100))
     public String getMetrics(String accountId){
         try{
             HttpHeaders headers = new HttpHeaders();
@@ -79,11 +86,11 @@ public class MetaStatsService {
                     HttpMethod.GET,
                     new HttpEntity<>(headers), String.class);
 
-//            log.info("Success: Retrieved metrics from meta-stats-api");
             if (response.getStatusCode() == HttpStatus.OK){
                 log.info("Success: Retrieved metrics from meta-stats-api");
             }else {
                 log.error("Error getting metrics: " + response.getStatusCode() + " " + response.getBody());
+                handleAsyncResponse(response);
             }
 
             return response.getBody();
@@ -95,6 +102,13 @@ public class MetaStatsService {
                     "Exception while calling MetaStatsApi",
                     e
             );
+        }
+    }
+
+    public void handleAsyncResponse(ResponseEntity<String> response) {
+        HttpStatusCode statusCode = response.getStatusCode();
+        if (statusCode == HttpStatus.ACCEPTED){
+            throw new HttpServerErrorException(statusCode, Objects.requireNonNull(response.getBody()));
         }
     }
 }

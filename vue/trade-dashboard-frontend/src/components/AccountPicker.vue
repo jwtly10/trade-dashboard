@@ -4,7 +4,7 @@
             v-model="selectedAccount">
         <option v-for="account in accounts" :key="account.accountID"
                 v-bind:value="account">
-            {{ account.accountID }}
+            {{ account.accountID + " - " + account.accountSize / 1000 + "K " + account.accountType}}
         </option>
     </select>
 </template>
