@@ -1,5 +1,5 @@
 <template>
-    <h1>Base Stats for account {{this.accountID + ' - ' +this.accountType}}</h1>
+    <h1>Base Stats for account {{this.account.accountID + ' - ' +this.account.accountType}}</h1>
 <div class="row">
     <div class="col">
         <Stat :data="[
@@ -8,7 +8,7 @@
     </div>
     <div class="col">
         <Stat :data="[
-            {title:'Net Profit / Loss',value:statsGetBalance}]"
+            {title:'Net Profit / Loss',value:statsGetPnl}]"
         />
     </div>
     <div class="col-4">
@@ -43,15 +43,11 @@ export default {
         Stat
     },
     props: {
-        accountKey : String,
-        accountSize: Number,
-        accountID : Number,
-        accountType: String,
-        created : undefined
+        account: Object
     },
     methods: {
         async getStats() {
-            await MetaStatsService.getStats(this.accountKey).then((response) => {
+            await MetaStatsService.getStats(this.account.accountKey).then((response) => {
                 this.stats = response.data
             })
         },
@@ -66,11 +62,16 @@ export default {
             }
         },
         statsAccountSize(){
-            return '$' + this.accountSize.toLocaleString()
+            return '$' + this.account.accountSize.toLocaleString()
         },
-        statsGetBalance(){
-                if (this.stats.balance){
-                    return '$' + this.stats.balance.toLocaleString()
+        statsGetPnl(){
+                if (this.stats.balance && this.account.accountSize){
+                    let pnl = this.stats.balance - this.account.accountSize
+                    if (pnl < 0){
+                        return '-$' + Math.abs(pnl).toLocaleString()
+                    }else{
+                        return '$' + Math.abs(pnl).toLocaleString()
+                    }
                 }
         }
     },
@@ -82,6 +83,7 @@ export default {
     },
     created() {
         this.getStats()
+
     }
 }
 </script>
