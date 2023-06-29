@@ -54,7 +54,10 @@ export default {
     },
     watch: {
         selectedAccount(account){
-            localStorage.selectedAccount = JSON.stringify(account)
+            console.log(JSON.stringify(account))
+            if (JSON.stringify(account) !== undefined){
+                localStorage.selectedAccount = JSON.stringify(account)
+            }
         }
     }
 }

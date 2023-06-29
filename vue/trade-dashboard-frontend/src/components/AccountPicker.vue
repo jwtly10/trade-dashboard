@@ -4,7 +4,7 @@
             v-model="selectedAccount">
         <option v-for="account in accounts" :key="account.accountID"
                 v-bind:value="account">
-            {{ account.accountID + " - " + account.accountSize / 1000 + "K " + account.accountType}}
+            {{ account.accountID !== undefined ? account.accountID + " - " + account.accountSize / 1000 + "K " + account.accountType : 'Fetching accounts failed'}}
         </option>
     </select>
 </template>

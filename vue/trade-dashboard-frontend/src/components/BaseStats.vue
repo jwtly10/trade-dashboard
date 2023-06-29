@@ -56,7 +56,8 @@ export default {
     },
     computed:{
         statsAverageReturn(){
-            return "$" + (((this.stats.wonTrades * this.stats.averageWin) + (this.stats.lostTrades * this.stats.averageLoss) ) / this.stats.trades).toFixed(2)
+            if (this.stats.wonTrades && this.stats.averageWin && this.stats.lostTrades && this.stats.averageLoss){
+            return "$" + (((this.stats.wonTrades * this.stats.averageWin) + (this.stats.lostTrades * this.stats.averageLoss) ) / this.stats.trades).toFixed(2)}
         },
         statsWinRate(){
             if (this.stats.wonTradesPercent) {
