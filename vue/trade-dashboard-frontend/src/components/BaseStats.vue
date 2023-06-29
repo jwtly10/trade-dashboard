@@ -8,7 +8,7 @@
     </div>
     <div class="col">
         <Stat :data="[
-            {title:'Net Profit / Loss',value:statsGetPnl}]"
+            {title:'Net Profit / Loss',value:statsGetPnl,extra:statsGetPnlPercentage}]"
         />
     </div>
     <div class="col-6">
@@ -27,7 +27,7 @@
     </div>
     <div class="col">
         <Stat :data="[
-            {title:'Average Return',value:statsAverageReturn},
+            {title:'Days Since First Trade',value:statsGetDaysSinceFirstTrade},
             ]"
         />
     </div>
@@ -57,11 +57,18 @@ export default {
     computed:{
         statsAverageReturn(){
             if (this.stats.wonTrades && this.stats.averageWin && this.stats.lostTrades && this.stats.averageLoss){
-            return "$" + (((this.stats.wonTrades * this.stats.averageWin) + (this.stats.lostTrades * this.stats.averageLoss) ) / this.stats.trades).toFixed(2)}
+            return "$" + (((this.stats.wonTrades * this.stats.averageWin)
+                + (this.stats.lostTrades * this.stats.averageLoss))
+                / this.stats.trades).toFixed(2)}
         },
         statsWinRate(){
             if (this.stats.wonTradesPercent) {
                return this.stats.wonTradesPercent.toFixed(2) + '%'
+            }
+        },
+        statsGetDaysSinceFirstTrade(){
+            if (this.stats.daysSinceTradingStarted){
+                return this.stats.daysSinceTradingStarted.toFixed(0)+ " Days"
             }
         },
         statsWins(){
@@ -86,12 +93,27 @@ export default {
                         return '$' + Math.abs(pnl).toLocaleString()
                     }
                 }
+        },
+        statsGetPnlPercentage(){
+            if (this.stats.balance && this.account.accountSize){
+                let pnl = this.stats.balance - this.account.accountSize
+                if (pnl < 0){
+                    return '-' + Math.abs((pnl/this.account.accountSize) * 100)
+                        .toFixed(2)
+                        .toLocaleString() + "%"
+                }else{
+                    return '+' + Math.abs((pnl/this.account.accountSize) * 100)
+                        .toFixed(2)
+                        .toLocaleString() + "%"
+                }
+            }
         }
     },
     data(){
         return {
            stats : {
            },
+            loading : false
         }
     },
     created() {

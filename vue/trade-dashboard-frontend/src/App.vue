@@ -1,7 +1,7 @@
 <template>
     <div class="text-center" id="app">
-        <nav class="pl-5 navbar bg-body-tertiary mb-5">
-            <div class="container-fluid">
+        <nav class="navbar bg-body-tertiary mb-5">
+            <div class="container">
                 <span class="navbar-brand mb-0 h1">trade-dashboard-frontend</span>
                 <AccountPicker :accounts="accounts" :account="selectedAccount" v-model="selectedAccount"/>
             </div>
@@ -54,7 +54,6 @@ export default {
     },
     watch: {
         selectedAccount(account){
-            console.log(JSON.stringify(account))
             if (JSON.stringify(account) !== undefined){
                 localStorage.selectedAccount = JSON.stringify(account)
             }
