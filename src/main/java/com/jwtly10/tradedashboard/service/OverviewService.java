@@ -1,11 +1,14 @@
 package com.jwtly10.tradedashboard.service;
 
 import com.jwtly10.tradedashboard.model.Account;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
+import static org.springframework.data.repository.init.ResourceReader.Type.JSON;
 
 @Service
 public class OverviewService {
@@ -19,20 +22,27 @@ public class OverviewService {
         this.metricsService = metricsService;
     }
 
-    public JSONObject buildOverview(){
-        JSONObject overviewJSON = new JSONObject();
+    public JSONArray buildOverview(){
+        JSONArray overviewJSONs = new JSONArray();
         List<Account> accountList = accountService.getAccounts();
 
         accountList.forEach(account ->{
             try {
-                overviewJSON.put(
-                        account.getAccountID(),
-                        metricsService.getKeyMetrics(String.valueOf(account.getAccountKey())));
+                JSONObject node = new JSONObject();
+                node = metricsService.getKeyMetrics(String.valueOf(account.getAccountKey()));
+                node.put("accountID", account.getAccountID());
+                node.put("accountKey", account.getAccountKey());
+                node.put("accountSize", account.getAccountSize());
+                node.put("accountType", account.getAccountType());
+                node.put("accountCreated", account.getCreated());
+
+                overviewJSONs.add(node);
             } catch (ParseException e) {
                 throw new RuntimeException(e);
             }
+
         });
 
-        return overviewJSON;
+        return overviewJSONs;
     }
 }

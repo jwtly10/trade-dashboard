@@ -34,7 +34,8 @@ public class AccountDAOImpl implements AccountDAO<Account>{
     public List<Account> list() {
         String sql = """
                 SELECT accountID, accountKey, accountSize, accountType, created
-                FROM accounts_tb;
+                FROM accounts_tb
+                ORDER BY accountSize, accountID;
                 """;
         return jdbcTemplate.query(sql, rowMapper);
     }
