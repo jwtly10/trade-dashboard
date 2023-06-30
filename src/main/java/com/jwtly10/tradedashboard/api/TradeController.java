@@ -28,8 +28,7 @@ public class TradeController {
 
     @PostMapping("/delete")
     public ResponseEntity<Object> deleteTrade(@RequestBody TradeDeleteDTO body){
-        int res = 0;
-        res = tradeService.deleteTrade(body.getTicketID(), body.getAccountID());
+        int res = tradeService.deleteTrade(body.getTicketID(), body.getAccountID());
         return new ResponseEntity<>(res + " rows deleted.", HttpStatus.OK);
     }
 }

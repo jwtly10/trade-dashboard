@@ -1,7 +1,5 @@
 package com.jwtly10.tradedashboard.api;
 
-import com.jwtly10.tradedashboard.service.AccountService;
-import com.jwtly10.tradedashboard.service.MetricsService;
 import com.jwtly10.tradedashboard.service.OverviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
