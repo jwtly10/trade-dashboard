@@ -1,5 +1,5 @@
 <template>
-    <select class="form-select w-50"
+    <select class="form-select w-50 search border-0 bg-dark"
             @input="changeAccount()"
             v-model="selectedAccount">
         <option v-for="account in accounts" :key="account.accountID"

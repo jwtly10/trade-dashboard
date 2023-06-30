@@ -1,12 +1,11 @@
 import axios from 'axios'
 
-const endpoint = 'metastats'
+const endpoint = '/overview'
 
 class metaStatsService{
     getStats(accountKey){
-        return axios.get(BASE_URL + "metastats/getMetrics/" + accountKey)
+        return axios.get(import.meta.env.VITE_DASHBOARD_API_URL + endpoint + "/getOverview" + accountKey)
     }
 }
-
 
 export default new metaStatsService()

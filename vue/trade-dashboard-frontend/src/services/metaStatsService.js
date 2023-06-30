@@ -1,10 +1,10 @@
 import axios from 'axios'
 
-const BASE_URL = 'http://localhost:8080/api/v1/'
+const endpoint = '/metastats'
 
 class metaStatsService{
     getStats(accountKey){
-       return axios.get(BASE_URL + "metastats/getMetrics/" + accountKey)
+       return axios.get(import.meta.env.VITE_DASHBOARD_API_URL + endpoint + '/getMetrics/' + accountKey)
     }
 }
 

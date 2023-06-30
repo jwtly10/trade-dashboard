@@ -1,6 +1,6 @@
 <template>
     <div class="text-center" id="app">
-        <nav class="navbar bg-body-tertiary mb-5">
+        <nav class="navbar p-3">
             <div class="container">
                 <span class="navbar-brand mb-0 h1">trade-dashboard-frontend</span>
                 <div class="form-check">
@@ -11,15 +11,23 @@
             </div>
         </nav>
         <div v-if="showOverview">
-            LALAL
-        </div>
-        <div v-else class="container text-center">
-            <div class="row">
-                <BaseStats v-bind:account="selectedAccount"/>
+            <div class="content-wrapper">
                 <div class="row">
-                    <Trades />
+                    <div class="bg-danger col-4">
+                    </div>
+                    <div class="col-8">
+                        <OverviewList />
+                    </div>
                 </div>
             </div>
+        </div>
+        <div v-else class="content-wrapper text-center">
+                <div class="row">
+                    <BaseStats v-bind:account="selectedAccount"/>
+                    <div class="row">
+                        <Trades />
+                    </div>
+                </div>
         </div>
     </div>
 </template>
@@ -29,13 +37,15 @@ import Trades from './components/Trades.vue'
 import BaseStats from "@/components/BaseStats.vue";
 import AccountPicker from "@/components/AccountPicker.vue";
 import AccountService from "@/services/accountService";
+import OverviewList from "@/components/OverviewList.vue";
 
 export default {
     name: 'App',
     components: {
         BaseStats,
         Trades,
-        AccountPicker
+        AccountPicker,
+        OverviewList
     },
     methods: {
        async getAccounts(){
@@ -56,8 +66,15 @@ export default {
         if (localStorage.selectedAccount){
             this.selectedAccount = JSON.parse(localStorage.selectedAccount)
         }
+
+        // if (localStorage.showOverview){
+        //     this.showOverview = localStorage.showOverview
+        // }
     },
     watch: {
+        showOverview(){
+            localStorage.showOverview = this.showOverview
+        },
         selectedAccount(account){
             if (JSON.stringify(account) !== undefined){
                 localStorage.selectedAccount = JSON.stringify(account)

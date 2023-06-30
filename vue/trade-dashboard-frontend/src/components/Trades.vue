@@ -1,8 +1,8 @@
 <template>
     <div class="container">
-        <h1 class="text-center">
+        <h2 class="text-center">
             Trade List
-        </h1>
+        </h2>
         <table class="table">
             <thead>
                 <th>Ticket ID</th>

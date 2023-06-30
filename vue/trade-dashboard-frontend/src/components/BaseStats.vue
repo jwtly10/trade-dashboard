@@ -1,5 +1,5 @@
 <template>
-    <h1>Base Stats for account {{this.account.accountID + ' - ' +this.account.accountType}}</h1>
+<!--    <h2>Base Stats for account {{this.account.accountID + ' - ' +this.account.accountType}}</h2>-->
 <div class="row">
     <div class="col">
         <Stat :data="[

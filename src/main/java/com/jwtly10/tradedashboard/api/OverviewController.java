@@ -13,11 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/overview")
 @RequiredArgsConstructor
-@CrossOrigin("http://localhost:5173/")
+@CrossOrigin("http://localhost:5173")
 public class OverviewController {
 
-    private final AccountService accountService;
-    private final MetricsService metricsService;
     private final OverviewService overviewService;
 
     @GetMapping("/getOverview")

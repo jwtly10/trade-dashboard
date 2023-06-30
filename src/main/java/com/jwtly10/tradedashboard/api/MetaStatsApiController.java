@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/metastats")
 @RequiredArgsConstructor
-@CrossOrigin("http://localhost:5173/")
+@CrossOrigin("http://localhost:5173")
 public class MetaStatsApiController {
 
     private final MetaStatsService metaStatsService;

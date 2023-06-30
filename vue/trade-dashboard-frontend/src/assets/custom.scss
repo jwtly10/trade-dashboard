@@ -1,6 +1,6 @@
 @import "../../node_modules/bootstrap/scss/bootstrap";
 // Custom Colors
-$darkblue: #191C24;
+$darkblue: #1A1C20;
 $darktext: #616684;
 
 [data-bs-theme="custom-dark"] {
@@ -10,11 +10,15 @@ $darktext: #616684;
   //--bs-body-bg-rgb: #{to-rgb($black)};
   //--bs-tertiary-bg: #{$blue-600};
 
+  p {
+    font-size: 14px;
+  }
+
   .colorLoss{
     color: #DC3545;
   }
   .colorWin{
-    color: #198754;
+    color: #1A1C20;
   }
   *{
     color: white;
@@ -24,12 +28,12 @@ $darktext: #616684;
     color: white;
   }
 
-  .bg-body-tertiary{
-    background-color: #191C24 !important;
+  .navbar{
+    background-color: #000000 !important;
   }
 
   .card{
-    background-color: #191C24 !important;
+    background-color: #1A1C20 !important;
   }
 
   .money-card-text{
@@ -40,5 +44,27 @@ $darktext: #616684;
 
   }
 
+  .bg-dark{
+    background-color: #1A1C20 !important;
+  }
+
+  .content-wrapper{
+    background: #2e2f32;
+    padding: 2.75rem 2.25rem;
+    width: 100%;
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+  }
+
+  .preview-list{
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-align-items: flex-start;
+    align-items: flex-start;
+    padding: 1rem 0rem;
+    font-size: .875rem;
+  }
 
 }
