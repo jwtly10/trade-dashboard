@@ -3,11 +3,15 @@
         <nav class="navbar bg-body-tertiary mb-5">
             <div class="container">
                 <span class="navbar-brand mb-0 h1">trade-dashboard-frontend</span>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" v-model="showOverview" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">Show Overview</label>
+                </div>
                 <AccountPicker :accounts="accounts" :account="selectedAccount" v-model="selectedAccount"/>
             </div>
         </nav>
-        <div v-if="Object.keys(this.selectedAccount).length === 0">
-            <p>Please choose an account</p>
+        <div v-if="showOverview">
+            LALAL
         </div>
         <div v-else class="container text-center">
             <div class="row">
@@ -42,6 +46,7 @@ export default {
     },
     data() {
         return {
+            showOverview: false,
             selectedAccount: {},
             accounts: [Object],
         }
