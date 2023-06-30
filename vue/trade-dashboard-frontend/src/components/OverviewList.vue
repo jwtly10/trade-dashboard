@@ -6,8 +6,9 @@
                     <h4 class="card-title pb-4">Accounts Overview</h4>
                 </div>
             </div>
-            <div class="row">
-                <OverviewItem />
+            <div v-for="(stat, index) in accountStats" class="row">
+                <OverviewItem v-bind:data="stat"/>
+                <hr class="m-0" v-if="index < accountStats.length - 1">
             </div>
         </div>
     </div>
@@ -16,6 +17,7 @@
 
 <script>
 import OverviewItem from "@/components/OverviewItem.vue";
+import OverviewService from "@/services/overviewService";
 
 export default {
     name: 'OverviewList',
@@ -23,8 +25,20 @@ export default {
     props: {
 
     },
+    data(){
+        return{
+            accountStats : [Object]
+        }
+    },
     methods:{
-
+        async getOverview() {
+            await OverviewService.getOverview().then((response) => {
+                this.accountStats = response.data
+            })
+        },
+    },
+    created(){
+        this.getOverview()
     }
 }
 </script>

@@ -7,22 +7,28 @@
                     <input class="form-check-input" type="checkbox" v-model="showOverview" value="" id="flexCheckDefault">
                     <label class="form-check-label" for="flexCheckDefault">Show Overview</label>
                 </div>
-                <AccountPicker :accounts="accounts" :account="selectedAccount" v-model="selectedAccount"/>
+
             </div>
         </nav>
         <div v-if="showOverview">
             <div class="content-wrapper">
                 <div class="row">
-                    <div class="bg-danger col-4">
+                    <div class="bg-danger col-sm">
                     </div>
-                    <div class="col-8">
+                    <div class="col-sm">
                         <OverviewList />
                     </div>
                 </div>
             </div>
         </div>
-        <div v-else class="content-wrapper text-center">
-                <div class="row">
+        <div v-else class="content-wrapper pt-4 text-center">
+            <div class="row d-flex justify-content-sm-end">
+                <div class="col-lg-3">
+                    <AccountPicker class="mb-4 justify-content-end" v-if="!showOverview" :accounts="accounts" :account="selectedAccount" v-model="selectedAccount"/>
+
+                </div>
+            </div>
+                <div class="row d-flex justify-content-center">
                     <BaseStats v-bind:account="selectedAccount"/>
                     <div class="row">
                         <Trades />
