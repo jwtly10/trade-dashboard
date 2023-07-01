@@ -1,38 +1,38 @@
 <template>
-<!--    <h2>Base Stats for account {{this.account.accountID + ' - ' +this.account.accountType}}</h2>-->
-<div class="row">
-    <div class="col">
-        <Stat :data="[
+  <!--    <h2>Base Stats for account {{this.account.accountID + ' - ' +this.account.accountType}}</h2>-->
+    <div class="row">
+        <div class="col">
+            <Stat :data="[
             {title:'Starting Overall Balance',value:statsAccountSize}]"
-        />
-    </div>
-    <div class="col">
-        <Stat :data="[
+            />
+        </div>
+        <div class="col">
+            <Stat :data="[
             {title:'Net Profit / Loss',value:statsGetPnl,extra:statsGetPnlPercentage}]"
-        />
-    </div>
-    <div class="col-6">
-        <Stat :data="[
+            />
+        </div>
+        <div class="col-6">
+            <Stat :data="[
             {title:'Average Return',value:statsAverageReturn},
             {title:'Win Rate',value:statsWinRate},
             {title:'Win Rate',value:statsWinRate}]"
-        />
-    </div>
-    <div class="col-6 col-lg-9">
-        <Stat :data="[
+            />
+        </div>
+        <div class="col-6 col-lg-9">
+            <Stat :data="[
             {title:'Number of Trades',value:statsTrades},
             {title:'Number of Wins',value:statsWins},
             {title:'Win Rate',value:statsWinRate}]"
-        />
-    </div>
-    <div class="col">
-        <Stat :data="[
+            />
+        </div>
+        <div class="col">
+            <Stat :data="[
             {title:'Days Since First Trade',value:statsGetDaysSinceFirstTrade},
             ]"
-        />
-    </div>
+            />
+        </div>
 
-</div>
+    </div>
 </template>
 
 <script>
@@ -41,7 +41,7 @@ import Stat from "@/components/Stat.vue";
 
 export default {
     name: 'BaseStats',
-    components:{
+    components: {
         Stat
     },
     props: {
@@ -54,73 +54,73 @@ export default {
             })
         },
     },
-    computed:{
-        statsAverageReturn(){
-            if (this.stats.wonTrades && this.stats.averageWin && this.stats.lostTrades && this.stats.averageLoss){
-            return "$" + (((this.stats.wonTrades * this.stats.averageWin)
-                + (this.stats.lostTrades * this.stats.averageLoss))
-                / this.stats.trades).toFixed(2)}
+    computed: {
+        statsAverageReturn() {
+            if (this.stats.wonTrades && this.stats.averageWin && this.stats.lostTrades && this.stats.averageLoss) {
+                return "$" + (((this.stats.wonTrades * this.stats.averageWin)
+                        + (this.stats.lostTrades * this.stats.averageLoss))
+                    / this.stats.trades).toFixed(2)
+            }
         },
-        statsWinRate(){
+        statsWinRate() {
             if (this.stats.wonTradesPercent) {
-               return this.stats.wonTradesPercent.toFixed(2) + '%'
+                return this.stats.wonTradesPercent.toFixed(2) + '%'
             }
         },
-        statsGetDaysSinceFirstTrade(){
-            if (this.stats.daysSinceTradingStarted){
-                return this.stats.daysSinceTradingStarted.toFixed(0)+ " Days"
+        statsGetDaysSinceFirstTrade() {
+            if (this.stats.daysSinceTradingStarted) {
+                return this.stats.daysSinceTradingStarted.toFixed(0) + " Days"
             }
         },
-        statsWins(){
-            if (this.stats.wonTrades){
+        statsWins() {
+            if (this.stats.wonTrades) {
                 return this.stats.wonTrades
             }
         },
-        statsAccountSize(){
+        statsAccountSize() {
             return '$' + this.account.accountSize.toLocaleString()
         },
-        statsTrades(){
-            if (this.stats.trades){
+        statsTrades() {
+            if (this.stats.trades) {
                 return this.stats.trades
             }
         },
-        statsGetPnl(){
-                if (this.stats.balance && this.account.accountSize){
-                    let pnl = this.stats.balance - this.account.accountSize
-                    if (pnl < 0){
-                        return '-$' + Math.abs(pnl).toLocaleString()
-                    }else{
-                        return '$' + Math.abs(pnl).toLocaleString()
-                    }
-                }
-        },
-        statsGetPnlPercentage(){
-            if (this.stats.balance && this.account.accountSize){
+        statsGetPnl() {
+            if (this.stats.balance && this.account.accountSize) {
                 let pnl = this.stats.balance - this.account.accountSize
-                if (pnl < 0){
-                    return '-' + Math.abs((pnl/this.account.accountSize) * 100)
+                if (pnl < 0) {
+                    return '-$' + Math.abs(pnl).toLocaleString()
+                } else {
+                    return '$' + Math.abs(pnl).toLocaleString()
+                }
+            }
+        },
+        statsGetPnlPercentage() {
+            if (this.stats.balance && this.account.accountSize) {
+                let pnl = this.stats.balance - this.account.accountSize
+                if (pnl < 0) {
+                    return '-' + Math.abs((pnl / this.account.accountSize) * 100)
                         .toFixed(2)
                         .toLocaleString() + "%"
-                }else{
-                    return '+' + Math.abs((pnl/this.account.accountSize) * 100)
+                } else {
+                    return '+' + Math.abs((pnl / this.account.accountSize) * 100)
                         .toFixed(2)
                         .toLocaleString() + "%"
                 }
             }
         }
     },
-    data(){
+    data() {
         return {
-           stats : {
-           },
-            loading : false
+            stats: {},
+            loading: false
         }
     },
     created() {
         this.getStats()
     },
-    watch:{
-        account(){
+    watch: {
+        account() {
             this.getStats()
         }
     }

@@ -7,7 +7,7 @@
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" v-model="equityFlag" value="" id="equityFlagCB">
-                    <label for="equityFlagCB" class="form-check-label" >Show Equity</label>
+                    <label for="equityFlagCB" class="form-check-label">Show Equity</label>
                 </div>
             </div>
             <div v-for="(stat, index) in accountStats" class="row">
@@ -27,21 +27,21 @@ export default {
     name: 'OverviewList',
     components: {OverviewItem},
     props: {
-        accountStats : [Object],
+        accountStats: [Object],
     },
-    data(){
-        return{
-            equityFlag : false
+    data() {
+        return {
+            equityFlag: false
         }
     },
-    methods:{
+    methods: {
         async getOverview() {
             await OverviewService.getOverview().then((response) => {
                 this.accountStats = response.data
             })
         },
     },
-    created(){
+    created() {
         // this.getOverview()
     }
 }

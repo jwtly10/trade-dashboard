@@ -4,7 +4,9 @@
             v-model="selectedAccount">
         <option v-for="account in accounts" :key="account.accountID"
                 v-bind:value="account">
-            {{ account.accountID !== undefined ? account.accountID + " - " + account.accountSize / 1000 + "K " + account.accountType : 'Fetching accounts failed'}}
+            {{
+            account.accountID !== undefined ? account.accountID + " - " + account.accountSize / 1000 + "K " + account.accountType : 'Fetching accounts failed'
+            }}
         </option>
     </select>
 </template>
@@ -13,8 +15,8 @@
 export default {
     name: 'AccountPicker',
     props: {
-        accounts : [Object],
-        account : Object
+        accounts: [Object],
+        account: Object
     },
     methods: {
         changeAccount() {
@@ -25,7 +27,8 @@ export default {
         return {
             selectedAccount: this.account
         }
-    }}
+    }
+}
 </script>
 
 

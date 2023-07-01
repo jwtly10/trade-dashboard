@@ -5,16 +5,16 @@
                 <div class="card">
                     <div class="card-body p-4 balchart">
                         <div>
-                            <h4 class="card-title pb-4 text-start">Live Account Profit  </h4>
+                            <h4 class="card-title pb-4 text-start">Live Account Profit </h4>
                         </div>
                         <div class="row">
                             <div class="col mb-3 d-flex justify-content-center">
-                                <BalanceChart v-if="loaded && accountIDs.length !== 0" :chartData="chartData" />
-                                <p v-else >No live accounts in profit yet</p>
+                                <BalanceChart v-if="loaded && accountIDs.length !== 0" :chartData="chartData"/>
+                                <p v-else>No live accounts in profit yet</p>
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <h3 v-if="loaded && accountIDs.length !== 0">Total Profit : {{liveProfit}}</h3>
+                                    <h3 v-if="loaded && accountIDs.length !== 0">Total Profit : {{ liveProfit }}</h3>
                                 </div>
                             </div>
 
@@ -37,9 +37,8 @@ import testData from '@/assets/testData.js'
 
 export default {
     name: 'Overview',
-    components: { BalanceChart, OverviewList },
-    props: {
-    },
+    components: {BalanceChart, OverviewList},
+    props: {},
     data() {
         return {
             loaded: false,
@@ -67,7 +66,7 @@ export default {
             this.accountStats.forEach(account => {
                 if ((account.balance - account.accountSize) > 0 && account.accountType === 'LIVE') {
                     let accountName = account.accountID + " "
-                        + (account.accountSize/1000) + "K " + account.accountType
+                        + (account.accountSize / 1000) + "K " + account.accountType
                     this.accountIDs.push(accountName)
                     dataSets.backgroundColor.push(this.getRandomColor())
                     dataSets.data.push(parseInt((account.balance - account.accountSize).toFixed(0)))
@@ -87,9 +86,9 @@ export default {
         },
     },
     computed: {
-        liveProfit(){
+        liveProfit() {
             let profit = 0
-            this.accountStats.forEach(account =>{
+            this.accountStats.forEach(account => {
                 let x = account.balance - account.accountSize
                 profit = x > 0 && account.accountType === 'LIVE'
                     ? profit + x

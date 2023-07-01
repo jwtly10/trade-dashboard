@@ -18,14 +18,14 @@
                 <div class="row d-flex justify-content-sm-end">
                     <div class="col-lg-3">
                         <AccountPicker class="mb-4 justify-content-end" v-if="!showOverview" :accounts="accounts"
-                            :account="selectedAccount" v-model="selectedAccount" />
+                                       :account="selectedAccount" v-model="selectedAccount"/>
 
                     </div>
                 </div>
                 <div class="row d-flex justify-content-center">
-                    <BaseStats v-bind:account="selectedAccount" />
+                    <BaseStats v-bind:account="selectedAccount"/>
                     <div class="row">
-                        <Trades />
+                        <Trades/>
                     </div>
                 </div>
             </div>
