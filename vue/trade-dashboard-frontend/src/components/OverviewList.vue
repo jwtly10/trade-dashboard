@@ -5,9 +5,13 @@
                 <div>
                     <h4 class="card-title pb-4">Accounts Overview</h4>
                 </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" v-model="equityFlag" value="" id="equityFlagCB">
+                    <label for="equityFlagCB" class="form-check-label" >Show Equity</label>
+                </div>
             </div>
             <div v-for="(stat, index) in accountStats" class="row">
-                <OverviewItem v-bind:data="stat"/>
+                <OverviewItem :equityFlag="equityFlag" :data="stat"/>
                 <hr class="m-0" v-if="index < accountStats.length - 1">
             </div>
         </div>
@@ -27,7 +31,8 @@ export default {
     },
     data(){
         return{
-            accountStats : [Object]
+            accountStats : [Object],
+            equityFlag : false
         }
     },
     methods:{

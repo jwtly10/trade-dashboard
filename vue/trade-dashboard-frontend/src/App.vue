@@ -4,8 +4,8 @@
             <div class="container">
                 <span class="navbar-brand mb-0 h1">trade-dashboard-frontend</span>
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" v-model="showOverview" value="" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault">Show Overview</label>
+                    <input class="form-check-input" type="checkbox" v-model="showOverview" value="" id="showOverViewCB">
+                    <label class="form-check-label" for="showOverViewCB">Show Overview</label>
                 </div>
 
             </div>
@@ -62,7 +62,7 @@ export default {
     },
     data() {
         return {
-            showOverview: false,
+            showOverview: true,
             selectedAccount: {},
             accounts: [Object],
         }
@@ -73,9 +73,9 @@ export default {
             this.selectedAccount = JSON.parse(localStorage.selectedAccount)
         }
 
-        // if (localStorage.showOverview){
-        //     this.showOverview = localStorage.showOverview
-        // }
+        if (localStorage.showOverview){
+            this.showOverview = localStorage.showOverview === 'true'
+        }
     },
     watch: {
         showOverview(){

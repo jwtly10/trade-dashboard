@@ -6,25 +6,29 @@
         </div>
         <div>
             <div class="d-flex justify-content-left align-items-center align-self-start">
-                <h5 class="mb-0">{{balance || "Loading..."}}</h5>
-                <p :class="profit(balancePercentage) ? 'text-success' : 'text-danger'" class="ms-2 mb-0 font-weight-medium">{{ balancePercentage || "Loading... "}}</p>
+                <h5 class="mb-0">{{equityFlag ? equity : balance  || "Loading..."}}</h5>
+                <p :class="(equityFlag ? profit(equityPercentage) : profit(balancePercentage)) ? 'text-success' : 'text-danger'" class="ms-2 mb-0 font-weight-medium">{{ equityFlag ? equityPercentage :  balancePercentage || "Loading... "}}</p>
             </div>
-            <p class="text-end money-card-text">Balance</p>
+            <p class="text-end money-card-text">{{equityFlag ? 'Equity' : 'Balance'}}</p>
         </div>
     </div>
 </template>
-
 <script>
 export default {
     name: 'OverviewItem',
     props: {
-        data : {}
+        data : {},
+        equityFlag : false
     },
     methods:{
         profit(val){
             if (val){
             return val.includes('+');
             }
+        }
+    },
+    data(){
+        return {
         }
     },
     computed : {
@@ -58,6 +62,25 @@ export default {
                         .toLocaleString() + "%"
                 }else{
                     return '+' + Math.abs((pnl/this.data.accountSize) * 100)
+                        .toFixed(2)
+                        .toLocaleString() + "%"
+                }
+            }
+        },
+        equity(){
+            if (this.data.equity){
+                return '$' + this.data.equity.toLocaleString()
+            }
+        },
+        equityPercentage(){
+            if (this.data.equity && this.data.accountSize){
+                let eq = this.data.equity - this.data.accountSize
+                if (eq < 0){
+                    return '-' + Math.abs((eq/this.data.accountSize) * 100)
+                        .toFixed(2)
+                        .toLocaleString() + "%"
+                }else{
+                    return '+' + Math.abs((eq/this.data.accountSize) * 100)
                         .toFixed(2)
                         .toLocaleString() + "%"
                 }
