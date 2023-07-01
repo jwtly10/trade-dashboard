@@ -2,7 +2,7 @@
     <div class="text-center" id="app">
         <nav class="navbar p-3">
             <div class="container">
-                <span class="navbar-brand mb-0 h1">trade-dashboard-frontend</span>
+                <span class="h4 mb-0 h1">trade-dashboard-frontend</span>
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" v-model="showOverview" value="" id="showOverViewCB">
                     <label class="form-check-label" for="showOverViewCB">Show Overview</label>
@@ -13,7 +13,8 @@
         <div v-if="showOverview">
             <div class="content-wrapper">
                 <div class="row">
-                    <div class="bg-danger col-sm">
+                    <div class="col-sm mb-3">
+                        <OverviewList />
                     </div>
                     <div class="col-sm">
                         <OverviewList />
