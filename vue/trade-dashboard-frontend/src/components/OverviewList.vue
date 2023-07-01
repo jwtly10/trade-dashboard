@@ -27,11 +27,10 @@ export default {
     name: 'OverviewList',
     components: {OverviewItem},
     props: {
-
+        accountStats : [Object],
     },
     data(){
         return{
-            accountStats : [Object],
             equityFlag : false
         }
     },
@@ -43,7 +42,7 @@ export default {
         },
     },
     created(){
-        this.getOverview()
+        // this.getOverview()
     }
 }
 </script>

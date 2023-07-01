@@ -10,31 +10,25 @@
 
             </div>
         </nav>
-        <div v-if="showOverview">
-            <div class="content-wrapper">
-                <div class="row">
-                    <div class="col-sm mb-3">
-                        <OverviewList />
-                    </div>
-                    <div class="col-sm">
-                        <OverviewList />
-                    </div>
-                </div>
+        <div class="container">
+            <div v-if="showOverview">
+                <Overview/>
             </div>
-        </div>
-        <div v-else class="content-wrapper pt-4 text-center">
-            <div class="row d-flex justify-content-sm-end">
-                <div class="col-lg-3">
-                    <AccountPicker class="mb-4 justify-content-end" v-if="!showOverview" :accounts="accounts" :account="selectedAccount" v-model="selectedAccount"/>
+            <div v-else class="content-wrapper pt-4 text-center">
+                <div class="row d-flex justify-content-sm-end">
+                    <div class="col-lg-3">
+                        <AccountPicker class="mb-4 justify-content-end" v-if="!showOverview" :accounts="accounts"
+                            :account="selectedAccount" v-model="selectedAccount" />
 
+                    </div>
                 </div>
-            </div>
                 <div class="row d-flex justify-content-center">
-                    <BaseStats v-bind:account="selectedAccount"/>
+                    <BaseStats v-bind:account="selectedAccount" />
                     <div class="row">
                         <Trades />
                     </div>
                 </div>
+            </div>
         </div>
     </div>
 </template>
@@ -44,7 +38,7 @@ import Trades from './components/Trades.vue'
 import BaseStats from "@/components/BaseStats.vue";
 import AccountPicker from "@/components/AccountPicker.vue";
 import AccountService from "@/services/accountService";
-import OverviewList from "@/components/OverviewList.vue";
+import Overview from "@/components/Overview.vue"
 
 export default {
     name: 'App',
@@ -52,13 +46,13 @@ export default {
         BaseStats,
         Trades,
         AccountPicker,
-        OverviewList
+        Overview
     },
     methods: {
-       async getAccounts(){
-          await AccountService.getAccounts().then((response) => {
-              this.accounts = response.data
-          })
+        async getAccounts() {
+            await AccountService.getAccounts().then((response) => {
+                this.accounts = response.data
+            })
         }
     },
     data() {
@@ -70,20 +64,20 @@ export default {
     },
     created() {
         this.getAccounts()
-        if (localStorage.selectedAccount){
+        if (localStorage.selectedAccount) {
             this.selectedAccount = JSON.parse(localStorage.selectedAccount)
         }
 
-        if (localStorage.showOverview){
+        if (localStorage.showOverview) {
             this.showOverview = localStorage.showOverview === 'true'
         }
     },
     watch: {
-        showOverview(){
+        showOverview() {
             localStorage.showOverview = this.showOverview
         },
-        selectedAccount(account){
-            if (JSON.stringify(account) !== undefined){
+        selectedAccount(account) {
+            if (JSON.stringify(account) !== undefined) {
                 localStorage.selectedAccount = JSON.stringify(account)
             }
         }

@@ -4,67 +4,75 @@ $darkblue: #1A1C20;
 $darktext: #616684;
 
 [data-bs-theme="custom-dark"] {
-  //--bs-body-color: var(--bs-white);
-  //--bs-body-color-rgb: #{to-rgb($white)};
-  --bs-body-bg: #{$black};
-  //--bs-body-bg-rgb: #{to-rgb($black)};
-  //--bs-tertiary-bg: #{$blue-600};
+    //--bs-body-color: var(--bs-white);
+    //--bs-body-color-rgb: #{to-rgb($white)};
+    --bs-body-bg: #{$black};
+    //--bs-body-bg-rgb: #{to-rgb($black)};
+    //--bs-tertiary-bg: #{$blue-600};
 
-  p {
-    font-size: 14px;
-  }
+    body{
+        background-color: #2e2f32;
+    }
 
-  .colorLoss{
-    color: #DC3545;
-  }
-  .colorWin{
-    color: #1A1C20;
-  }
-  *{
-    color: white;
-  }
+    p {
+        font-size: 14px;
+    }
 
-  td{
-    color: white;
-  }
+    .colorLoss {
+        color: #DC3545;
+    }
 
-  .navbar{
-    background-color: #000000 !important;
-  }
+    .colorWin {
+        color: #1A1C20;
+    }
 
-  .card{
-    background-color: #1A1C20 !important;
-  }
+    * {
+        color: white;
+    }
 
-  .money-card-text{
-    color: #616684;
-  }
+    td {
+        color: white;
+    }
 
-  .money-card-title{
+    .navbar {
+        background-color: #000000 !important;
+    }
 
-  }
+    .card {
+        background-color: #1A1C20 !important;
+    }
 
-  .bg-dark{
-    background-color: #1A1C20 !important;
-  }
+    .money-card-text {
+        color: #616684;
+    }
 
-  .content-wrapper{
-    background: #2e2f32;
-    padding: 2.75rem 2.25rem;
-    width: 100%;
-    -webkit-flex-grow: 1;
-    flex-grow: 1;
-  }
+    .money-card-title {}
 
-  .preview-list{
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: row;
-    flex-direction: row;
-    -webkit-align-items: flex-start;
-    align-items: flex-start;
-    padding: 1rem 0;
-    font-size: .875rem;
-  }
+    .balchart{
+        max-height: 500px !important;
+    }
+
+    .bg-dark {
+        background-color: #1A1C20 !important;
+    }
+
+    .content-wrapper {
+        background: #2e2f32;
+        padding: 2.75rem 2.25rem;
+        width: 100%;
+        -webkit-flex-grow: 1;
+        flex-grow: 1;
+    }
+
+    .preview-list {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-direction: row;
+        flex-direction: row;
+        -webkit-align-items: flex-start;
+        align-items: flex-start;
+        padding: 1rem 0;
+        font-size: .875rem;
+    }
 
 }
