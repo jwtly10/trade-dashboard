@@ -24,9 +24,9 @@
                 </div>
                 <div class="row d-flex justify-content-center">
                     <BaseStats v-bind:account="selectedAccount"/>
-                    <div class="row">
-                        <Trades/>
-                    </div>
+                    <!--                    <div class="row">-->
+                    <!--                        <Trades/>-->
+                    <!--                    </div>-->
                 </div>
             </div>
         </div>
