@@ -78,7 +78,9 @@ export default {
             }
         },
         statsAccountSize() {
-            return '$' + this.account.accountSize.toLocaleString()
+            if (this.account.accountSize) {
+                return '$' + this.account.accountSize.toLocaleString()
+            }
         },
         statsTrades() {
             if (this.stats.trades) {

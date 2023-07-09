@@ -23,10 +23,8 @@
                     </div>
                 </div>
                 <div class="row d-flex justify-content-center">
-                    <BaseStats v-bind:account="selectedAccount"/>
-                    <!--                    <div class="row">-->
-                    <!--                        <Trades/>-->
-                    <!--                    </div>-->
+                    <p v-if="!showBase">Please select an account</p>
+                    <BaseStats v-else v-bind:account="selectedAccount"/>
                 </div>
             </div>
         </div>
@@ -58,6 +56,7 @@ export default {
     data() {
         return {
             showOverview: true,
+            showBase: false,
             selectedAccount: {},
             accounts: [Object],
         }
@@ -78,6 +77,7 @@ export default {
         },
         selectedAccount(account) {
             if (JSON.stringify(account) !== undefined) {
+                this.showBase = true
                 localStorage.selectedAccount = JSON.stringify(account)
             }
         }
