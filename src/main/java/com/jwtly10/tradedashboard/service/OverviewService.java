@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static org.springframework.data.repository.init.ResourceReader.Type.JSON;
-
 @Service
 public class OverviewService {
 
@@ -22,11 +20,11 @@ public class OverviewService {
         this.metricsService = metricsService;
     }
 
-    public JSONArray buildOverview(){
+    public JSONArray buildOverview() {
         JSONArray overviewJSONs = new JSONArray();
         List<Account> accountList = accountService.getAccounts();
 
-        accountList.forEach(account ->{
+        accountList.forEach(account -> {
             try {
                 JSONObject node = new JSONObject();
                 node = metricsService.getKeyMetrics(String.valueOf(account.getAccountKey()));
