@@ -22,7 +22,7 @@ public class MetaStatsService {
     @Value("${meta.stats.api.user.token}")
     private String accountKey;
 
-    private RestTemplate restTemplate;
+    private RestTemplate restTemplate = new RestTemplate();
 
     public String getOpenTrades(String accountId) {
         try {

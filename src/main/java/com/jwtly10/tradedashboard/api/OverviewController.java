@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/overview")
 @RequiredArgsConstructor
-@CrossOrigin("http://localhost:5173")
+@CrossOrigin(origins = {"http://localhost:5173/", "https://trade-dashboard.netlify.app/"})
 public class OverviewController {
 
     private final OverviewService overviewService;

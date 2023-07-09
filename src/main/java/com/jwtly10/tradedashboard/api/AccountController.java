@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/accounts")
 @RequiredArgsConstructor
-@CrossOrigin("http://localhost:5173/")
+@CrossOrigin(origins = {"http://localhost:5173/", "https://trade-dashboard.netlify.app/"})
 public class AccountController {
 
     private final AccountService accountService;

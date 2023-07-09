@@ -10,18 +10,18 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/metastats")
 @RequiredArgsConstructor
-@CrossOrigin("http://localhost:5173")
+@CrossOrigin(origins = {"http://localhost:5173/", "https://trade-dashboard.netlify.app/"})
 public class MetaStatsApiController {
 
     private final MetaStatsService metaStatsService;
 
     @GetMapping("/getOpenTrades/{accountKey}")
-    public ResponseEntity<?> getOpenTrades(@PathVariable("accountKey") String accountKey){
+    public ResponseEntity<?> getOpenTrades(@PathVariable("accountKey") String accountKey) {
         return ResponseEntity.ok(metaStatsService.getOpenTrades(accountKey));
     }
 
     @GetMapping("/getHistoricTrades/{accountKey}")
-    public ResponseEntity<?> getHistoricTrades(@PathVariable("accountKey") String accountKey){
+    public ResponseEntity<?> getHistoricTrades(@PathVariable("accountKey") String accountKey) {
         return ResponseEntity.ok(metaStatsService.getHistoricTrades(accountKey));
     }
 
@@ -31,7 +31,7 @@ public class MetaStatsApiController {
         return ResponseEntity.ok(metricsService.buildMetricsJSON(accountKey).toString());
     }
 
-@GetMapping("/getMetrics/{accountKey}")
+    @GetMapping("/getMetrics/{accountKey}")
     public ResponseEntity<?> getMetrics(@PathVariable("accountKey") String accountKey) throws ParseException {
         MetricsService metricsService = new MetricsService(metaStatsService);
         return ResponseEntity.ok(metricsService.getKeyMetrics(accountKey).toString());
