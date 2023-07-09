@@ -12,9 +12,9 @@
                                 <BalanceChart v-if="loaded && accountIDs.length !== 0" :chartData="chartData"/>
                                 <p v-else>No live accounts in profit yet</p>
                             </div>
-                            <div class="row">
-                                <div class="col">
-                                    <h3 v-if="loaded && accountIDs.length !== 0">Total Profit : {{ liveProfit }}</h3>
+                            <div class="row w-100">
+                                <div class="col mb-3 d-flex justify-content-center w-100">
+                                    <h5 v-if="loaded && accountIDs.length !== 0">Total Profit : {{ liveProfit }}</h5>
                                 </div>
                             </div>
 

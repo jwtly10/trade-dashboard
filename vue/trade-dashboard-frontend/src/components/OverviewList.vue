@@ -3,11 +3,11 @@
         <div class="card-body p-4">
             <div class="d-flex flex-row justify-content-between">
                 <div>
-                    <h4 class="card-title pb-4">Accounts Overview</h4>
+                    <h5 class="card-title pb-4 text-start">Accounts Overview</h5>
                 </div>
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" v-model="equityFlag" value="" id="equityFlagCB">
-                    <label for="equityFlagCB" class="form-check-label">Show Equity</label>
+                    <label for="equityFlagCB" class="h6 w-100 form-check-label">Show Equity</label>
                 </div>
             </div>
             <div v-for="(stat, index) in accountStats" class="row">
