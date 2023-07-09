@@ -4,75 +4,88 @@ $darkblue: #1A1C20;
 $darktext: #616684;
 
 [data-bs-theme="custom-dark"] {
-    //--bs-body-color: var(--bs-white);
-    //--bs-body-color-rgb: #{to-rgb($white)};
-    --bs-body-bg: #{$black};
-    //--bs-body-bg-rgb: #{to-rgb($black)};
-    //--bs-tertiary-bg: #{$blue-600};
+  //--bs-body-color: var(--bs-white);
+  //--bs-body-color-rgb: #{to-rgb($white)};
+  --bs-body-bg: #{$black};
+  //--bs-body-bg-rgb: #{to-rgb($black)};
+  //--bs-tertiary-bg: #{$blue-600};
 
-    body{
-        background-color: #2e2f32;
-    }
+  body {
+    background-color: #2e2f32;
+  }
 
-    p {
-        font-size: 14px;
-    }
+  p {
+    font-size: 14px;
+  }
 
-    .colorLoss {
-        color: #DC3545;
-    }
+  .colorLoss {
+    color: #DC3545;
+  }
 
-    .colorWin {
-        color: #1A1C20;
-    }
+  .colorWin {
+    color: #1A1C20;
+  }
 
-    * {
-        color: white;
-    }
+  * {
+    color: white;
+  }
 
-    td {
-        color: white;
-    }
+  td {
+    color: white;
+  }
 
-    .navbar {
-        background-color: #000000 !important;
-    }
+  .navbar {
+    background-color: #000000 !important;
+  }
 
-    .card {
-        background-color: #1A1C20 !important;
-    }
+  .card {
+    background-color: #1A1C20 !important;
+  }
 
-    .money-card-text {
-        color: #616684;
-    }
+  .money-card-text {
+    color: #616684;
+  }
 
-    .money-card-title {}
+  .money-card-title {
+  }
 
-    .balchart{
-        max-height: 500px !important;
-    }
+  .balchart {
+    max-height: 500px !important;
+  }
 
-    .bg-dark {
-        background-color: #1A1C20 !important;
-    }
+  .bg-dark {
+    background-color: #1A1C20 !important;
+  }
 
+  .content-wrapper {
+    background: #2e2f32;
+    padding: 2.75rem 2.25rem;
+    width: 100%;
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+  }
+
+  @media only screen and (max-width: 600px) {
     .content-wrapper {
-        background: #2e2f32;
-        padding: 2.75rem 2.25rem;
-        width: 100%;
-        -webkit-flex-grow: 1;
-        flex-grow: 1;
+      padding: 1rem 0.75rem;
     }
+    .money-card-text {
+      font-size: 10px;
+    }
+    .form-check {
+      width: 150px;
+    }
+  }
 
-    .preview-list {
-        display: -webkit-flex;
-        display: flex;
-        -webkit-flex-direction: row;
-        flex-direction: row;
-        -webkit-align-items: flex-start;
-        align-items: flex-start;
-        padding: 1rem 0;
-        font-size: .875rem;
-    }
+  .preview-list {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-align-items: flex-start;
+    align-items: flex-start;
+    padding: 1rem 0;
+    font-size: .875rem;
+  }
 
 }

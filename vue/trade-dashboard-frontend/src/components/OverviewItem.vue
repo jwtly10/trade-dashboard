@@ -5,7 +5,7 @@
             <p class="money-card-text">{{ accountType || "Loading..." }}</p>
         </div>
         <div>
-            <div class="d-flex justify-content-left align-items-center align-self-start">
+            <div class="d-flex justify-content-left align-items-center align-self-start mt-3">
                 <h5 class="mb-0">{{ equityFlag ? equity : balance || "Loading..." }}</h5>
                 <p :class="(equityFlag ? profit(equityPercentage) : profit(balancePercentage)) ? 'text-success' : 'text-danger'"
                    class="ms-2 mb-0 font-weight-medium">
