@@ -1,6 +1,5 @@
 package com.jwtly10.tradedashboard.model;
 
-
 import lombok.*;
 
 import java.sql.Timestamp;
