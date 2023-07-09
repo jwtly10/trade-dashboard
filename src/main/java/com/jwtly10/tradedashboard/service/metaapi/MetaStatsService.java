@@ -34,7 +34,6 @@ public class MetaStatsService {
                     HttpMethod.GET,
                     new HttpEntity<>(headers), String.class);
 
-//            log.info("Success: Retrieved open trades from meta-stats-api");
 
             return response.getBody();
 
