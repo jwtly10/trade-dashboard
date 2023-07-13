@@ -3,10 +3,10 @@
         <nav class="navbar p-3">
             <div class="container">
                 <span class="h4 mb-0 h1">trade-dashboard-frontend</span>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" v-model="showOverview" value="" id="showOverViewCB">
-                    <label class="form-check-label" for="showOverViewCB">Show Overview</label>
-                </div>
+                <!--                <div class="form-check">-->
+                <!--                    <input class="form-check-input" type="checkbox" v-model="showOverview" value="" id="showOverViewCB">-->
+                <!--                    <label class="form-check-label" for="showOverViewCB">Show Overview</label>-->
+                <!--                </div>-->
 
             </div>
         </nav>
@@ -14,19 +14,19 @@
             <div v-if="showOverview">
                 <Overview/>
             </div>
-            <div v-else class="content-wrapper pt-4 text-center">
-                <div class="row d-flex justify-content-sm-end">
-                    <div class="col-lg-3">
-                        <AccountPicker class="mb-4 justify-content-end" v-if="!showOverview" :accounts="accounts"
-                                       :account="selectedAccount" v-model="selectedAccount"/>
+            <!--            <div v-else class="content-wrapper pt-4 text-center">-->
+            <!--                <div class="row d-flex justify-content-sm-end">-->
+            <!--                    <div class="col-lg-3">-->
+            <!--                        <AccountPicker class="mb-4 justify-content-end" v-if="!showOverview" :accounts="accounts"-->
+            <!--                                       :account="selectedAccount" v-model="selectedAccount"/>-->
 
-                    </div>
-                </div>
-                <div class="row d-flex justify-content-center">
-                    <p v-if="!showBase">Please select an account</p>
-                    <BaseStats v-else v-bind:account="selectedAccount"/>
-                </div>
-            </div>
+            <!--                    </div>-->
+            <!--                </div>-->
+            <!--                <div class="row d-flex justify-content-center">-->
+            <!--                    <p v-if="!showBase">Please select an account</p>-->
+            <!--                    <BaseStats v-else v-bind:account="selectedAccount"/>-->
+            <!--                </div>-->
+            <!--            </div>-->
         </div>
     </div>
 </template>
