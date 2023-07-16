@@ -5,6 +5,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,13 @@ import java.util.function.Function;
 
 @Service
 public class JwtService {
-    private static final String SECRET_KEY = "/yEftJVL3TVvVDoVKAFWEryOg4EJZOoM6m0N5Oy6+UW/BRd4kzaCRiUJpZRm9MxWVx7pMhggPyc4eaDNYv+XcIHrEmn2QDMZYAYLEJFDbyPZ9UtqpFOYOF1x9zIaW5BQRGhzh/dSdi/ARzhwobWKbTFfE9dlMxQXRPP/wz8vGgBBM8CQfSqVWEMvo1Y3AfC/ohXuZTx01UVSZ+eESv3AFRGNJii3GxOEHaUW6Wpa2ptJBIMRoUSXX97zDqlRjQyc5HtUax9P0zFRGtadzCikn2xYXxY5jfqSYQrqqGtNBqdx2k10qLrMTJeId1u1fHLqLORQn3xpBAd4NtKAAve2HjKDq67iZhoMRXAbscMMlF0=";
+
+    // Generate new keys
+    @Value("${jwt.key}")
+    private String SECRET_KEY;
+
+    @Value("${session.timeout}")
+    private Long sessionTimeout;
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -33,7 +40,7 @@ public class JwtService {
                 .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * sessionTimeout))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }

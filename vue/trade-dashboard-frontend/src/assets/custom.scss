@@ -14,6 +14,11 @@ $darktext: #616684;
     background-color: #2e2f32;
   }
 
+  .logout {
+    height: 20px;
+    cursor: pointer;
+  }
+
   .form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: #bfbdbd;
     opacity: 1; /* Firefox */

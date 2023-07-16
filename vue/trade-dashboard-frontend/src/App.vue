@@ -1,19 +1,18 @@
 <template>
     <div class="text-center" id="app">
         <nav class="navbar p-3">
-            <div class="container">
+            <div class="container d-flex align-items-center flex-row">
                 <span class="h4 mb-0 h1">trade-dashboard-frontend</span>
                 <!--                <div class="form-check">-->
                 <!--                    <input class="form-check-input" type="checkbox" v-model="showOverview" value="" id="showOverViewCB">-->
                 <!--                    <label class="form-check-label" for="showOverViewCB">Show Overview</label>-->
                 <!--                </div>-->
-
+                <img v-if="loggedIn" v-on:click="logout" class="p-0 m-0 logout" src="/logout.png" alt="logout-button">
             </div>
         </nav>
         <div class="container">
-            <div v-if="!loggedIn">
-                <Login @authenticated="loginAuthenticatedUser"/>
-            </div>
+            <Login v-if="!loggedIn"
+                   @authenticated="loginAuthenticatedUser"/>
             <div v-else>
                 <Overview/>
             </div>
@@ -62,6 +61,15 @@ export default {
         },
         loginAuthenticatedUser() {
             this.loggedIn = true;
+        },
+        getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        },
+        logout() {
+            this.loggedIn = false;
+            document.cookie = 'Token' + '=; Max-Age=0'
         }
     },
     data() {
@@ -74,13 +82,18 @@ export default {
         }
     },
     created() {
-        this.getAccounts()
+        // this.getAccounts()
         if (localStorage.selectedAccount) {
             this.selectedAccount = JSON.parse(localStorage.selectedAccount)
         }
 
         if (localStorage.showOverview) {
             this.showOverview = localStorage.showOverview === 'true'
+        }
+
+        // Check if token valid
+        if (this.getCookie("Token")) {
+            this.loggedIn = true
         }
     },
     watch: {
@@ -91,6 +104,11 @@ export default {
             if (JSON.stringify(account) !== undefined) {
                 this.showBase = true
                 localStorage.selectedAccount = JSON.stringify(account)
+            }
+        },
+        loggedIn() {
+            if (this.loggedIn) {
+                this.getAccounts()
             }
         }
     }

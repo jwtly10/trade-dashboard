@@ -1,32 +1,24 @@
 <template>
-    <div id="login" class="d-flex justify-content-center flex-column">
-        <form onsubmit="return false;" method="post">
-            <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input v-model="input.username" required type="text" class="form-control border-0 text-white"
+    <div id="login" class="d-flex justify-content-center text-center flex-column mt-5">
+        <form onsubmit="return false;" class="m-auto w-100" method="post">
+            <h3>Login</h3>
+            <div class="form-group test m-2">
+                <!--                <label for="exampleInputEmail1">Username</label>-->
+                <input v-model="input.username" required type="text"
+                       class="form-control login text-center border-0 text-white"
                        id="username" name="username"
-                       placeholder="Enter username">
+                       placeholder="Username">
             </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input v-model="input.password" required type="password" class="form-control border-0 text-white"
+            <div class="form-group m-2">
+                <!--                <label for="exampleInputPassword1">Password</label>-->
+                <input v-model="input.password" required type="password"
+                       class="form-control text-center border-0 text-white"
                        id="password" name="password"
                        placeholder="Password">
             </div>
             <button type="button" v-on:click="login()" class="btn btn-primary">Login</button>
         </form>
         <p class="text-danger">{{ errorMsg }}</p>
-
-        <!--        <h1>Login</h1>
-                <div class="form-inputs">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username" v-model="input.username" placeholder="Username"/>
-                </div>
-                <div class="form-inputs">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" v-model="input.password" placeholder="Password"/>
-                </div>
-                <button type="button" v-on:click="login()">Login</button>-->
     </div>
 </template>
 
@@ -51,9 +43,9 @@ export default {
                 AuthenticationService.authenticate(this.input.username, this.input.password).then((response) => {
                     if (response.status === 200) {
                         this.errorMsg = "Auth Success"
-                        console.log("Token: " + response.data.token)
+                        // Create session cookie
                         let d = new Date();
-                        d.setTime(d.getTime() + 24 * 60 * 60 * 1000);
+                        d.setTime(d.getTime() + 60 * import.meta.env.VITE_SESSION_TIMEOUT * 1000);
                         let expires = "expires=" + d.toUTCString();
                         document.cookie =
                             "Token=" + response.data.token + ";" + expires + ";path=/";
@@ -67,18 +59,6 @@ export default {
             } else {
                 this.errorMsg = "A username/email and password must be present"
             }
-            /*if (this.input.username !== "" && this.input.password !== "") {
-                authenticate(this.input.username, this.input.password)
-                // This should actually be an api call not a check against this.$parent.mockAccount
-                // if (this.input.username === this.$parent.mockAccount.username && this.input.password == this.$parent.mockAccount.password) {
-                //     this.$emit("authenticated", true);
-                //     this.$router.replace({name: "Secure"});
-                // } else {
-                //     console.log("The username and / or password is incorrect");
-                // }
-            } else {
-                console.log("A username and password must be present");
-            }*/
         }
     }
 }

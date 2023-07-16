@@ -1,13 +1,13 @@
 import axios from 'axios'
 
 const endpoint = '/overview'
-const token = getCookie('Token')
-const config = {
-    headers: {'Authorization': `Bearer ${token}`}
-};
 
 class overviewService {
     getOverview(accountKey) {
+        let token = getCookie('Token')
+        let config = {
+            headers: {'Authorization': `Bearer ${token}`}
+        };
         return axios.get(import.meta.env.VITE_DASHBOARD_API_URL + endpoint + "/getOverview", config)
 
     }
