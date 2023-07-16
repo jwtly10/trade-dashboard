@@ -14,6 +14,24 @@ $darktext: #616684;
     background-color: #2e2f32;
   }
 
+  .logout {
+    height: 20px;
+    cursor: pointer;
+  }
+
+  .form-control::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #bfbdbd;
+    opacity: 1; /* Firefox */
+  }
+
+  .form-control:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #bfbdbd;
+  }
+
+  .form-control::-ms-input-placeholder { /* Microsoft Edge */
+    color: #bfbdbd;
+  }
+
   p {
     font-size: 14px;
   }

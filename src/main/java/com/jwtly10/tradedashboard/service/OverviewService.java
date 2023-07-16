@@ -24,6 +24,7 @@ public class OverviewService {
         JSONArray overviewJSONs = new JSONArray();
         List<Account> accountList = accountService.getAccounts();
 
+
         accountList.forEach(account -> {
             try {
                 JSONObject node = new JSONObject();
@@ -40,7 +41,6 @@ public class OverviewService {
             }
 
         });
-
         return overviewJSONs;
     }
 }

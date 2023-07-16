@@ -71,7 +71,6 @@ public class MetaStatsService {
         }
     }
 
-    @Retryable(retryFor = HttpServerErrorException.class, maxAttempts = 2, backoff = @Backoff(delay = 100))
     public String getMetrics(String accountId) {
         try {
             HttpHeaders headers = new HttpHeaders();
