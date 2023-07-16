@@ -78,6 +78,7 @@ export default {
         },
         async getOverview() {
             await OverviewService.getOverview().then((response) => {
+                console.log(response.data)
                 this.accountStats = response.data
                 // this.accountStats = testData.getTestData()
                 this.loadChartData()

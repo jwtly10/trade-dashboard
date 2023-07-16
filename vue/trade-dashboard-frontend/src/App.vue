@@ -11,9 +11,15 @@
             </div>
         </nav>
         <div class="container">
-            <div v-if="showOverview">
+            <div v-if="!loggedIn">
+                <Login @authenticated="loginAuthenticatedUser"/>
+            </div>
+            <div v-else>
                 <Overview/>
             </div>
+            <!--            <div v-if="showOverview">-->
+            <!--                <Overview/>-->
+            <!--            </div>-->
             <!--            <div v-else class="content-wrapper pt-4 text-center">-->
             <!--                <div class="row d-flex justify-content-sm-end">-->
             <!--                    <div class="col-lg-3">-->
@@ -37,6 +43,7 @@ import BaseStats from "@/components/BaseStats.vue";
 import AccountPicker from "@/components/AccountPicker.vue";
 import AccountService from "@/services/accountService";
 import Overview from "@/components/Overview.vue"
+import Login from "@/components/Login.vue"
 
 export default {
     name: 'App',
@@ -44,18 +51,23 @@ export default {
         BaseStats,
         Trades,
         AccountPicker,
-        Overview
+        Overview,
+        Login
     },
     methods: {
         async getAccounts() {
             await AccountService.getAccounts().then((response) => {
                 this.accounts = response.data
             })
+        },
+        loginAuthenticatedUser() {
+            this.loggedIn = true;
         }
     },
     data() {
         return {
             showOverview: true,
+            loggedIn: false,
             showBase: false,
             selectedAccount: {},
             accounts: [Object],
