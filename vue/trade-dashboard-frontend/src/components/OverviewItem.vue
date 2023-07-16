@@ -1,7 +1,7 @@
 <template>
     <div class="w-100 d-flex align-items-center justify-content-between">
-        <div class="text-start">
-            <h5 class="mb-0 mt-3">{{ accountTitle || "Loading..." }}</h5>
+        <div class="text-start ">
+            <h5 class="mb-0 mt-3 account-det">{{ accountTitle || "Loading..." + accountType || "Loading..." }}</h5>
             <p class="money-card-text">{{ accountType || "Loading..." }}</p>
         </div>
         <div>
@@ -35,7 +35,7 @@ export default {
     computed: {
         accountTitle() {
             if (this.data.accountID) {
-                return this.data.accountID + " - " + (this.data.accountSize / 1000) + "K"
+                return this.data.accountID + "  " + "(" + (this.data.accountSize / 1000) + "K" + ")"
             }
         },
         accountType() {
