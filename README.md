@@ -1,9 +1,9 @@
 # trade-dashboard
 
-Dashboard for displaying various stats for trading accounts.
+Personal Dashboard for displaying various stats for trading accounts.
 
 Built with Java and VueJS it uses a 3rd party API [MetaAPI](https://metaapi.cloud/) which collates
-data from trading accounts and builds large stat JSONs which are processed & displayed by this app.
+data from my trading accounts and builds large stat JSONs which are processed & displayed by this app.
 
 #### Technologies:
 
