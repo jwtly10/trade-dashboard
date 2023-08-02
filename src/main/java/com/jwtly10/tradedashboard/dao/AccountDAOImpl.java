@@ -12,17 +12,18 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class AccountDAOImpl implements AccountDAO<Account>{
+public class AccountDAOImpl implements AccountDAO<Account> {
     private static final Logger log = LoggerFactory.getLogger(AccountDAOImpl.class);
-    private final JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
     RowMapper<Account> rowMapper = (rs, rowNum) -> {
-        Account account = new Account();
-        account.setAccountID(rs.getInt("accountID"));
-        account.setAccountKey(rs.getString("accountKey"));
-        account.setAccountSize(rs.getInt("accountSize"));
-        account.setAccountType(rs.getString("accountType"));
-        account.setCreated(rs.getTimestamp("created"));
+        Account account = Account.builder()
+                .accountID(rs.getInt("accountID"))
+                .accountKey(rs.getString("accountKey"))
+                .accountSize(rs.getInt("accountSize"))
+                .accountType(rs.getString("accountType"))
+                .created(rs.getTimestamp("created"))
+                .build();
         return account;
     };
 
@@ -41,22 +42,20 @@ public class AccountDAOImpl implements AccountDAO<Account>{
     }
 
     @Override
-    public void create(Account account) {
-        String sql = """
-                INSERT INTO accounts_tb
-                (accountID, accountKey, accountSize, accountType)
-                VALUES
-                (?,?,?,?);
-                """;
-       int res = jdbcTemplate.update(sql,
-               account.getAccountID(),
-               account.getAccountKey(),
-               account.getAccountSize());
-       if (res == 1){
-           log.info("New account created: " + account.getAccountID());
-       }else {
-           log.info("New account failed to create: " + account.getAccountID());
-       }
+    public Account create(Account account) {
+        String sql = "insert into accounts_tb (accountID, accountKey, accountSize, accountType) values (?,?,?,?);";
+        int res = jdbcTemplate.update(sql,
+                account.getAccountID(),
+                account.getAccountKey(),
+                account.getAccountSize(),
+                account.getAccountType());
+        if (res == 1) {
+            log.info("New account created: " + account.getAccountID());
+        } else {
+            log.info("New account failed to create: " + account.getAccountID());
+        }
+
+        return account;
     }
 
     @Override
@@ -66,9 +65,9 @@ public class AccountDAOImpl implements AccountDAO<Account>{
                 FROM accounts_tb WHERE accountID = ?;
                 """;
         Account account = null;
-        try{
+        try {
             account = jdbcTemplate.queryForObject(sql, rowMapper, accountID);
-        }catch (DataAccessException ex){
+        } catch (DataAccessException ex) {
             log.info("Account not for found for accountID: " + accountID);
         }
         return Optional.ofNullable(account);
@@ -82,7 +81,7 @@ public class AccountDAOImpl implements AccountDAO<Account>{
     @Override
     public int delete(int accountID) {
         return jdbcTemplate.update("""
-        DELETE FROM accounts_tb WHERE accountID = ?;
-        """, accountID);
+                DELETE FROM accounts_tb WHERE accountID = ?;
+                """, accountID);
     }
 }

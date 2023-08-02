@@ -8,7 +8,7 @@ public interface AccountDAO<T> {
 
     List<T> list();
 
-    void create(T t);
+    T create(T t);
 
     Optional<T> get(int id);
 

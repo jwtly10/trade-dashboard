@@ -5,6 +5,7 @@ import lombok.*;
 import java.sql.Timestamp;
 
 @Data
+@Builder
 public class Account {
     int accountID;
     String accountKey;
